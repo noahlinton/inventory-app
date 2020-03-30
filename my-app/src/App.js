@@ -109,69 +109,71 @@ class App extends React.Component {
     console.log('State: ', this.state);
     //JSX
     return (
-      <div>
-        <InventoryList items={this.state.items} />
-        <h1>Inventory App</h1>
-        <form onSubmit={this.submit}>
-          <div className="form-input">
-            <input
-              type="text"
-              name="itemName"
-              placeholder="Item Name"
-              value={this.state.itemName}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-input">
-            <input
-              type="text"
-              name="location"
-              placeholder="Location"
-              value={this.state.location}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-input">
-            <input
-              type="text"
-              name="section"
-              placeholder="Section"
-              value={this.state.section}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-input">
-            <input
-              type="text"
-              name="shelf"
-              placeholder="Shelf"
-              value={this.state.shelf}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-input">
-            <input
-              type="text"
-              name="bin"
-              placeholder="Bin"
-              value={this.state.bin}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-input">
-            <textarea
-              name="description"
-              cols="30"
-              rows="10"
-              placeholder="Item Description"
-              value={this.state.description}
-              onChange={this.handleChange}
-            ></textarea>
-          </div>
-          <button>Submit</button>
-        </form>
-        <div>
+      <div className="app">
+        <h1 id="main-header">Inventory App</h1>
+        <div className="form-display">
+          <form onSubmit={this.submit}>
+            <div className="form-input">
+              <input
+                type="text"
+                name="itemName"
+                placeholder="Item Name"
+                value={this.state.itemName}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-input">
+              <input
+                type="text"
+                name="location"
+                placeholder="Location"
+                value={this.state.location}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-input">
+              <input
+                type="text"
+                name="section"
+                placeholder="Section"
+                value={this.state.section}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-input">
+              <input
+                type="text"
+                name="shelf"
+                placeholder="Shelf"
+                value={this.state.shelf}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-input">
+              <input
+                type="text"
+                name="bin"
+                placeholder="Bin"
+                value={this.state.bin}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-input">
+              <textarea
+                name="description"
+                cols="30"
+                rows="2"
+                placeholder="Item Description"
+                value={this.state.description}
+                onChange={this.handleChange}
+              ></textarea>
+            </div>
+            <button>Submit</button>
+          </form>
+        </div>
+        <div className="search-bar">
           <input
+            className="search-bar"
             type="text"
             name="search"
             placeholder="Search"

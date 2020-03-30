@@ -1,5 +1,46 @@
 .items {
-  overflow:scroll; 
-  height:400px;
   border: 1px solid lightgray;
+  overflow:scroll; 
+  height:305px;
+}
+
+#main-header{
+  display: block;
+  text-align: center;
+}
+.app {
+  padding: 10px;
+}
+
+.form-display{
+  display: block;
+  text-align: center;
+}
+
+.form-input{
+  margin: 10px 0px;
+  /*border: 1px solid lightgray;*/
+}
+
+.form-input input, .form-input textarea{
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+button{
+  background-color: blue;
+  color: white;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 2.5rem;
+  cursor: pointer;
+}
+
+.search-bar{
+  display: block;
+  text-align: center;
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.5;
 }
