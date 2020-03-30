@@ -9,6 +9,10 @@ class App extends React.Component {
 
   state = {
     itemName: '',
+    location: '',
+    section: '',
+    shelf: '',
+    bin: '',
     description: '',
     items: []
   };
@@ -90,6 +94,42 @@ class App extends React.Component {
               type="text"
               name="itemName"
               placeholder="Item Name"
+              value={this.state.itemName}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="form-input">
+            <input
+              type="text"
+              name="location"
+              placeholder="Location"
+              value={this.state.itemName}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="form-input">
+            <input
+              type="text"
+              name="section"
+              placeholder="Section"
+              value={this.state.itemName}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="form-input">
+            <input
+              type="text"
+              name="shelf"
+              placeholder="Shelf"
+              value={this.state.itemName}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="form-input">
+            <input
+              type="text"
+              name="bin"
+              placeholder="Bin"
               value={this.state.itemName}
               onChange={this.handleChange}
             />

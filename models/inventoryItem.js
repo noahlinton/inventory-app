@@ -4,6 +4,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const InventoryItemSchema = new Schema({
     itemName: String,
+    location: String,
+    section: String,
+    shelf: String,
+    bin: String,
     description: String,
     date: {
         type: String,
