@@ -3,6 +3,7 @@ import axios from "axios";
 import DenseTable from "./table";
 
 import "./App.css";
+import InventoryList from "./InventoryList";
 
 
 class App extends React.Component {
@@ -14,7 +15,8 @@ class App extends React.Component {
     shelf: '',
     bin: '',
     description: '',
-    items: []
+    items: [],
+    search: ''
   };
 
   componentDidMount = () => {
@@ -45,6 +47,10 @@ class App extends React.Component {
 
     const payload = {
       itemName: this.state.itemName,
+      location: this.state.location,
+      section: this.state.section,
+      shelf: this.state.shelf,
+      bin: this.state.bin,
       description: this.state.description
     };
 
@@ -67,6 +73,10 @@ class App extends React.Component {
   resetUserInputs = () => {
     this.setState({
       itemName: '',
+      location: '',
+      section: '',
+      shelf: '',
+      bin: '',
       description: ''
     });
   };
@@ -74,10 +84,23 @@ class App extends React.Component {
   displayItems = (items) => {
     if (!items.length) return null;
 
-    return items.map((item, index) => (
+    let filteredItems = items.filter((item) => {
+      if (item.itemName.toLowerCase().indexOf(this.state.search) !== -1 || item.description.toLowerCase().indexOf(this.state.search) !== -1) {
+        return item;
+      }
+
+    });
+
+    return filteredItems.map((item, index) => (
       <div key={index}>
         <h3>{item.itemName}</h3>
-        <p>{item.description}</p>
+        <ul>
+          <li>Location: {item.location}</li>
+          <li>Section: {item.section}</li>
+          <li>Shelf: {item.shelf}</li>
+          <li>Bin: {item.bin}</li>
+          <li>Keywords: {item.description}</li>
+        </ul>
       </div>
     ));
   };
@@ -87,7 +110,8 @@ class App extends React.Component {
     //JSX
     return (
       <div>
-        <h1>Welcome to my App</h1>
+        <InventoryList items={this.state.items} />
+        <h1>Inventory App</h1>
         <form onSubmit={this.submit}>
           <div className="form-input">
             <input
@@ -103,7 +127,7 @@ class App extends React.Component {
               type="text"
               name="location"
               placeholder="Location"
-              value={this.state.itemName}
+              value={this.state.location}
               onChange={this.handleChange}
             />
           </div>
@@ -112,7 +136,7 @@ class App extends React.Component {
               type="text"
               name="section"
               placeholder="Section"
-              value={this.state.itemName}
+              value={this.state.section}
               onChange={this.handleChange}
             />
           </div>
@@ -121,7 +145,7 @@ class App extends React.Component {
               type="text"
               name="shelf"
               placeholder="Shelf"
-              value={this.state.itemName}
+              value={this.state.shelf}
               onChange={this.handleChange}
             />
           </div>
@@ -130,7 +154,7 @@ class App extends React.Component {
               type="text"
               name="bin"
               placeholder="Bin"
-              value={this.state.itemName}
+              value={this.state.bin}
               onChange={this.handleChange}
             />
           </div>
@@ -146,6 +170,15 @@ class App extends React.Component {
           </div>
           <button>Submit</button>
         </form>
+        <div>
+          <input
+            type="text"
+            name="search"
+            placeholder="Search"
+            value={this.state.search}
+            onChange={this.handleChange}
+          />
+        </div>
         <div className='items' >
           {this.displayItems(this.state.items)}
         </div>

@@ -19,6 +19,7 @@ router.get("/", (req, res) => {
 router.post("/save", (req, res) => {
     const data = req.body;
     const newInventoryItem = new InventoryItem(data)
+    console.log(data);
 
     newInventoryItem.save((error) => {
         if (error) {
