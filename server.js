@@ -12,6 +12,8 @@ const routes = require('./routes/api');
 //const MONGODB_URI =
 //"mongodb+srv://lintonn:x9S6Nm8cJxAX37m@inventoryapp-b0oan.mongodb.net/test?retryWrites=true&w=majority";
 
+//mongodb+srv://lintonn:x9S6Nm8cJxAX37m@inventoryapp-b0oan.mongodb.net/test?retryWrites=true&w=majority
+
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/inventory", {
   useNewUrlParser: true,
   useUnifiedTopology: true
