@@ -85,7 +85,7 @@ class App extends React.Component {
     if (!items.length) return null;
 
     let filteredItems = items.filter((item) => {
-      if (item.itemName.toLowerCase().indexOf(this.state.search) !== -1 || item.description.toLowerCase().indexOf(this.state.search) !== -1) {
+      if (item.itemName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || item.description.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1) {
         return item;
       }
 
