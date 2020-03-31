@@ -9,6 +9,7 @@ const InventoryItemSchema = new Schema({
     shelf: String,
     bin: String,
     description: String,
+    keywords: String,
     date: {
         type: String,
         default: Date.now()

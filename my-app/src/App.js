@@ -16,7 +16,9 @@ class App extends React.Component {
     bin: '',
     description: '',
     items: [],
-    search: ''
+    search: '',
+    selectedFilter: "everywhere",
+    keywords: ''
   };
 
   componentDidMount = () => {
@@ -28,7 +30,7 @@ class App extends React.Component {
       .then((response) => {
         const data = response.data;
         this.setState({ items: data });
-        console.log('');
+        console.log('Data:', data);
       })
       .catch(() => {
         alert('Error retrieving data');
@@ -51,7 +53,8 @@ class App extends React.Component {
       section: this.state.section,
       shelf: this.state.shelf,
       bin: this.state.bin,
-      description: this.state.description
+      description: this.state.description,
+      keywords: this.state.keywords
     };
 
     axios({
@@ -77,15 +80,27 @@ class App extends React.Component {
       section: '',
       shelf: '',
       bin: '',
-      description: ''
+      description: '',
+      keywords: ''
     });
   };
 
   displayItems = (items) => {
     if (!items.length) return null;
+    //|| item.location.toLowerCase().indexOf(this.state.selectedFilter) !== -1
+    console.log("Items from server", items);
+    let locationFilterItems = items.filter((item) => {
+      if (this.state.selectedFilter.toLowerCase() == "truck") {
+        if (item.location != null && item.location.toLowerCase() == "truck") {
+          return item;
+        }
+      } else {
+        return item;
+      }
+    });
 
-    let filteredItems = items.filter((item) => {
-      if (item.itemName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || item.description.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1) {
+    let filteredItems = locationFilterItems.filter((item) => {
+      if (item.itemName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || item.keywords.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1) {
         return item;
       }
 
@@ -94,15 +109,23 @@ class App extends React.Component {
     return filteredItems.map((item, index) => (
       <div key={index}>
         <h3>{item.itemName}</h3>
+        <p>{item.description}</p>
         <ul>
           <li>Location: {item.location}</li>
           <li>Section: {item.section}</li>
           <li>Shelf: {item.shelf}</li>
           <li>Bin: {item.bin}</li>
-          <li>Keywords: {item.description}</li>
+          <li>Keywords: {item.keywords}</li>
         </ul>
+        <button>Add to Used List</button>
       </div>
     ));
+  };
+
+  handleOptionChange = changeEvent => {
+    this.setState({
+      selectedFilter: changeEvent.target.value
+    });
   };
 
   render() {
@@ -119,6 +142,15 @@ class App extends React.Component {
                 name="itemName"
                 placeholder="Item Name"
                 value={this.state.itemName}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-input">
+              <input
+                type="text"
+                name="description"
+                placeholder="Description"
+                value={this.state.description}
                 onChange={this.handleChange}
               />
             </div>
@@ -160,11 +192,11 @@ class App extends React.Component {
             </div>
             <div className="form-input">
               <textarea
-                name="description"
+                name="keywords"
                 cols="30"
                 rows="2"
-                placeholder="Item Description"
-                value={this.state.description}
+                placeholder="Item Keywords"
+                value={this.state.keywords}
                 onChange={this.handleChange}
               ></textarea>
             </div>
@@ -180,6 +212,28 @@ class App extends React.Component {
             value={this.state.search}
             onChange={this.handleChange}
           />
+          <label>
+            <input
+              type="radio"
+              name="react-tips"
+              value="Truck"
+              checked={this.state.selectedFilter === "Truck"}
+              onChange={this.handleOptionChange}
+              className="form-check-input"
+            />
+            Truck Only
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="react-tips"
+              value="everywhere"
+              checked={this.state.selectedFilter === "everywhere"}
+              onChange={this.handleOptionChange}
+              className="form-check-input"
+            />
+            Everywhere
+          </label>
         </div>
         <div className='items' >
           {this.displayItems(this.state.items)}
